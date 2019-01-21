@@ -9,7 +9,6 @@ import Styles from './style.m.css';
 
 export default class StatusBar extends Component {
     render () {
-        const { avatar, currentUserFirstName, currentUserLastName } = this.props;
 
         return (
             <Consumer>
