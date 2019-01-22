@@ -80,7 +80,7 @@ export const loadFonts = () => ({
 export const connectHtml = () => ({
     plugins: [
         new HtmlWebpackPlugin({
-            title:    'Lectrum Education',
+            title:    'FaceBook Wall',
             template: `${STATIC}/template.html`,
             favicon:  `${STATIC}/favicon/lectrum-favicon-512x512.png`,
         }),
