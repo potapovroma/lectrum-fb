@@ -1,6 +1,6 @@
 // Core
 import React, { Component } from 'react';
-import { hot } from 'react-hot-loader';
+import { api } from 'config/api';
 
 // Components
 import Feed from 'components/Feed';
@@ -15,13 +15,13 @@ const options = {
     currentUserLastName:  'Simpson',
 };
 
-@hot(module)
 export default class App extends Component {
     render() {
         return (
             <Provider value = { options }>
                 <Feed />
             </Provider>
+
         );
     }
 }
