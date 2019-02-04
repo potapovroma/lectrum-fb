@@ -12,14 +12,14 @@ import Styles from './style.m.css';
 
 export default class Post extends Component {
   static propTypes = {
-    id: string.isRequired,
-    comment: string.isRequired,
-    created: number.isRequired,
-    _likePpost: func.isRequired,
-    likes: array.isRequired,
+      id: string.isRequired,
+      comment: string.isRequired,
+      created: number.isRequired,
+      _likePost: func.isRequired,
+      likes: array.isRequired,
   };
     render() {
-      const { comment, created, _likePpost, id, likes } = this.props;
+      const { comment, created, _likePost, id, likes } = this.props;
 
         return (
             <Consumer>
@@ -29,7 +29,7 @@ export default class Post extends Component {
                         <a>{`${ context.currentUserFirstName } ${ context.currentUserLastName }`}</a>
                         <time>{moment.unix(created).format('MMM D h:mm:ss a')}</time>
                         <p>{ comment }</p>
-                        <Like id = { id } likes = { likes } _likePpost = { _likePpost } />
+                        <Like id = { id } likes = { likes } _likePost = { _likePost } { ...context } />
                     </section>
                 )}
             </Consumer>

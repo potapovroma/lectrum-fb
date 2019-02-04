@@ -18,13 +18,14 @@ export default class Feed extends Component {
 
         this._createPost = this._createPost.bind(this);
         this._setPostsFetchingState = this._setPostsFetchingState.bind(this);
-        this._likePpost = this._likePpost.bind(this);
+        this._likePost = this._likePost.bind(this);
     }
+
   state = {
       posts:
       [
           { id: '123', comment: 'Hi there!!', created: 1526825076849, likes: []},
-          { id: 23, comment: 'How are you today??!', created: 1526825076903, likes: []}
+          { id: '23', comment: 'How are you today??!', created: 1526825076903, likes: []}
       ],
       spinning: false,
 
@@ -52,13 +53,13 @@ export default class Feed extends Component {
       }));
   }
 
-  async _likePpost (id) {
+  async _likePost (id) {
     const { currentUserFirstName, currentUserLastName } = this.props;
     this._setPostsFetchingState(true);
 
     await delay(1200);
 
-      const newPosts = this.state.post.map((post) => {
+      const newPosts = this.state.posts.map((post) => {
           if (post.id === id) {
               return {
                   ...post,
@@ -84,7 +85,7 @@ render () {
       const { posts, spinning } = this.state;
 
       const postsJSX = posts.map((post) => {
-          return <Post key = { post.id } { ...post } _likePpost = { this._likePpost } />;
+          return <Post key = { post.id } { ...post } _likePost = { this._likePost } />;
       });
 
       return (
