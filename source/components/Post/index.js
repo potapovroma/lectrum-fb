@@ -12,27 +12,49 @@ import Styles from './style.m.css';
 
 export default class Post extends Component {
   static propTypes = {
-      id: string.isRequired,
-      comment: string.isRequired,
-      created: number.isRequired,
-      _likePost: func.isRequired,
-      likes: array.isRequired,
+      id:          string.isRequired,
+      comment:     string.isRequired,
+      created:     number.isRequired,
+      _likePost:   func.isRequired,
+      _removePost: func.isRequired,
+      likes:       array.isRequired,
   };
-    render() {
+  constructor () {
+    super();
+
+    this._removePost = this._removePost.bind(this);
+  }
+
+  _removePost () {
+      const { _removePost, id } = this.props;
+
+      _removePost(id);
+  }
+
+  render() {
       const { comment, created, _likePost, id, likes } = this.props;
 
-        return (
-            <Consumer>
-                {(context) => (
-                    <section className = { Styles.post }>
-                        <img src = { context.avatar } />
-                        <a>{`${ context.currentUserFirstName } ${ context.currentUserLastName }`}</a>
-                        <time>{moment.unix(created).format('MMM D h:mm:ss a')}</time>
-                        <p>{ comment }</p>
-                        <Like id = { id } likes = { likes } _likePost = { _likePost } { ...context } />
-                    </section>
-                )}
-            </Consumer>
-        );
-    }
+      return (
+          <Consumer>
+              {(context) => (
+                  <section className = { Styles.post }>
+                      <span
+                          className = { Styles.cross }
+                          onClick = { this._removePost }
+                      />
+                      <img src = { context.avatar } />
+                      <a>{`${ context.currentUserFirstName } ${ context.currentUserLastName }`}</a>
+                      <time>{moment.unix(created).format('MMM D h:mm:ss a')}</time>
+                      <p>{ comment }</p>
+                      <Like
+                          _likePost = { _likePost }
+                          id = { id }
+                          likes = { likes }
+                          { ...context }
+                      />
+                  </section>
+              )}
+          </Consumer>
+      );
+  }
 }
